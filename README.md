@@ -1,17 +1,24 @@
-# Bridgeit
+# Bridgeit landing page
 
-An early, university-facing landing page for Bridgeit: a pre-launch concept for shared infrastructure connecting high-achieving international students with financial need and participating universities.
+A production-ready Vite + React landing page for Bridgeit’s pre-pilot university outreach.
 
-## Run locally
+## Stack
 
-This is a static site. From the project root, run:
+- React 19 + Vite
+- Framer Motion for entrance, scroll, and ambient motion
+- Lucide React for interface icons
+
+## Local development
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8000`.
+To produce a deployable production bundle:
 
-## Important status
+```bash
+npm run build
+```
 
-Bridgeit is not yet a public application platform, scholarship program, or university partner network. The page deliberately reflects that pre-pilot status and invites founding universities to start a conversation.
+Bridgeit is an independent pre-launch initiative, not yet a public application platform or university partner network.
