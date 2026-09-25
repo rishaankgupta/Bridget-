@@ -12,3 +12,7 @@
 /* Keep hero copy deterministic after scroll: CSS owns its one-time entrance state. */
 .hero-copy.hero-reveal{opacity:1!important;visibility:visible!important;animation:hero-copy-in .8s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal .eyebrow{animation:hero-copy-in .65s .05s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal h1{animation:hero-copy-in .7s .13s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal>p{animation:hero-copy-in .7s .22s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal .hero-actions{animation:hero-copy-in .7s .31s cubic-bezier(.2,.8,.2,1) both}@keyframes hero-copy-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.partner-panel{left:39%;top:325px;width:174px;border-left-color:rgba(201,239,87,.58);background:rgba(4,31,29,.3)}.partner-panel span{color:#cce3d8}.partner-panel i{color:var(--lime)}
 @media(max-width:800px){.partner-panel{left:39%;top:325px}}@media(max-width:520px){.partner-panel{display:none}}
+
+/* The second destination intentionally shares the same source profile through a second path. */
+.second-connection{top:344px;right:calc(8% + 310px + 7px);width:104px;transform:rotate(-30deg);transform-origin:right}.second-connection:before{right:-3px}.partner-panel{left:29%;top:320px}.pathway-art{will-change:transform}.profile-panel,.university-panel,.connection-line{will-change:opacity,transform}
+@media(max-width:800px){.second-connection{display:none}.partner-panel{left:39%;top:325px}}

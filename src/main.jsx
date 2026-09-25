@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowDown, ArrowRight, ArrowUpRight, Menu, MoveRight, X } from 'lucide-react';
-import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import './styles.css';
 
 const email = 'mailto:hello@bridgeit.global?subject=Founding%20partner%20conversation';
@@ -20,25 +20,27 @@ function Header() {
   return <header className={`header ${scrolled ? 'scrolled' : ''}`}><a href="#top" aria-label="Bridgeit home"><Mark /></a><nav className="desktop-nav">{links.map(([label, href]) => <a href={href} key={href}>{label}</a>)}<a className="header-cta" href={email}>Speak with us <ArrowUpRight size={14} /></a></nav><button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>{open ? <X /> : <Menu />}</button><AnimatePresence>{open && <motion.nav initial={{ opacity: 0, y: -15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} className="mobile-nav">{links.map(([label, href]) => <a href={href} key={href} onClick={() => setOpen(false)}>{label}</a>)}<a href={email}>Speak with us <ArrowUpRight size={17} /></a></motion.nav>}</AnimatePresence></header>;
 }
 
-function OrbitArt() {
+function OrbitArt({ active }) {
+  const panel = (delay, from) => ({ initial: false, animate: active ? { opacity: 1, x: 0, y: 0, rotate: 0 } : { opacity: 0, ...from }, transition: { delay: active ? delay : 0, duration: active ? .68 : .35, ease: [0.2, 0.8, 0.2, 1] } });
   return <div className="pathway-art" aria-hidden="true">
     <div className="pathway-glow" /><div className="pathway-grid" />
-    <motion.div className="profile-panel" initial={{ opacity: 0, x: 32, rotate: 4 }} animate={{ opacity: 1, x: 0, rotate: 0 }} transition={{ delay: .65, duration: .8, ease: 'easeOut' }}>
+    <motion.div className="profile-panel" {...panel(.14, { x: 36, y: 0, rotate: 4 })}>
       <div className="profile-panel-head"><span className="profile-avatar">A</span><div><b>Student profile</b><small>Verified pathway</small></div><i>✓</i></div>
       <div className="profile-progress"><span>Profile strength</span><b>92%</b><i><em /></i></div>
       <div className="profile-lines"><span /><span /><span /></div>
       <div className="profile-tags"><b>Academic</b><b>Context</b><b>Ambition</b></div>
     </motion.div>
-    <motion.div className="connection-line" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1.1, duration: .7 }} />
-    <motion.div className="university-panel" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.25, duration: .7 }}><span>01</span><b>University<br />ready to meet them.</b><i>↗</i></motion.div>
-    <motion.div className="university-panel partner-panel" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.45, duration: .7 }}><span>02</span><b>Funding aligned<br />with potential.</b><i>✓</i></motion.div>
+    <motion.div className="connection-line" initial={false} animate={active ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }} transition={{ delay: active ? .46 : 0, duration: active ? .52 : .25, ease: 'easeOut' }} />
+    <motion.div className="connection-line second-connection" initial={false} animate={active ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }} transition={{ delay: active ? .56 : 0, duration: active ? .52 : .25, ease: 'easeOut' }} />
+    <motion.div className="university-panel" {...panel(.6, { x: -24, y: 0, rotate: 0 })}><span>01</span><b>University<br />ready to meet them.</b><i>↗</i></motion.div>
+    <motion.div className="university-panel partner-panel" {...panel(.72, { x: -18, y: 15, rotate: 0 })}><span>02</span><b>Funding aligned<br />with potential.</b><i>✓</i></motion.div>
     <div className="pathway-caption"><span>ONE PORTABLE PROFILE</span><i>→</i><span>MANY POSSIBILITIES</span></div>
   </div>;
 }
 
 function Hero() {
-  const { scrollY } = useScroll(); const artY = useTransform(scrollY, [0, 700], [0, 100]); const artSpring = useSpring(artY, { stiffness: 80, damping: 25 });
-  return <section className="hero" id="top"><div className="hero-grain" /><div className="hero-meta"><span>Global access, reimagined</span><span className="scroll-cue">Scroll to explore <i /></span></div><div className="hero-copy hero-reveal"><Eyebrow light>A new kind of pathway</Eyebrow><h1>The world’s talent<br />deserves <em>a way in.</em></h1><p>We’re developing the trusted infrastructure that connects extraordinary students, wherever they begin, with universities ready to invest in their potential.</p><div className="hero-actions"><Button href="#universities" variant="lime">For universities</Button><a className="quiet-button" href="#model">Discover the model <ArrowDown size={17} /></a></div></div><motion.div style={{ y: artSpring }}><OrbitArt /></motion.div><div className="hero-foot">Independent by design. Global by default. <span>✦</span></div></section>;
+  const heroRef = useRef(null); const heroInView = useInView(heroRef, { amount: 0.28 });
+  return <section className="hero" id="top" ref={heroRef}><div className="hero-grain" /><div className="hero-meta"><span>Global access, reimagined</span><span className="scroll-cue">Scroll to explore <i /></span></div><div className="hero-copy hero-reveal"><Eyebrow light>A new kind of pathway</Eyebrow><h1>The world’s talent<br />deserves <em>a way in.</em></h1><p>We’re developing the trusted infrastructure that connects extraordinary students, wherever they begin, with universities ready to invest in their potential.</p><div className="hero-actions"><Button href="#universities" variant="lime">For universities</Button><a className="quiet-button" href="#model">Discover the model <ArrowDown size={17} /></a></div></div><OrbitArt active={heroInView} /><div className="hero-foot">Independent by design. Global by default. <span>✦</span></div></section>;
 }
 
 function ModelCard({ number, title, children, icon }) { return <motion.article className="model-card" variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} transition={{ duration: .65, delay: number * .1 }}><span>{String(number).padStart(2, '0')} / {title.split(' ')[0]}</span><div className={`model-icon ${icon}`}>{icon === 'star' ? '✦' : <><i /><i /><i /></>}</div><h3>{title}</h3><p>{children}</p></motion.article>; }
