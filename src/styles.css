@@ -8,3 +8,7 @@
 @media(max-width:1000px){.pathway-art{right:-55px;transform:scale(.82);transform-origin:right center}.hero-copy{max-width:590px}.hero h1{font-size:clamp(54px,6.1vw,73px)}}
 @media(max-width:800px){.pathway-art{right:-93px;top:300px;transform:scale(.6);transform-origin:right top}.hero-copy{max-width:480px}.brand-it{color:var(--lime)}.scrolled .brand-it{color:var(--coral)}}
 @media(max-width:520px){.pathway-art{right:-150px;top:350px;transform:scale(.48);transform-origin:right top}.hero h1{font-size:48px}.profile-panel{box-shadow:0 24px 55px rgba(0,20,18,.24)}}
+
+/* Keep hero copy deterministic after scroll: CSS owns its one-time entrance state. */
+.hero-copy.hero-reveal{opacity:1!important;visibility:visible!important;animation:hero-copy-in .8s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal .eyebrow{animation:hero-copy-in .65s .05s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal h1{animation:hero-copy-in .7s .13s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal>p{animation:hero-copy-in .7s .22s cubic-bezier(.2,.8,.2,1) both}.hero-copy.hero-reveal .hero-actions{animation:hero-copy-in .7s .31s cubic-bezier(.2,.8,.2,1) both}@keyframes hero-copy-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.partner-panel{left:39%;top:325px;width:174px;border-left-color:rgba(201,239,87,.58);background:rgba(4,31,29,.3)}.partner-panel span{color:#cce3d8}.partner-panel i{color:var(--lime)}
+@media(max-width:800px){.partner-panel{left:39%;top:325px}}@media(max-width:520px){.partner-panel{display:none}}
