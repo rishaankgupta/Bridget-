@@ -8,7 +8,7 @@ const email = 'mailto:hello@bridgeit.global?subject=Founding%20partner%20convers
 const fadeUp = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0 } };
 const viewport = { once: true, amount: 0.25 };
 
-function Mark() { return <span className="brand"><span className="brand-bridge">bridge</span><span className="brand-it">it</span><span className="brand-dot">.</span></span>; }
+function Mark() { return <span className="brand"><span className="brand-b">b</span>ridgeit<span className="brand-dot">.</span></span>; }
 function Eyebrow({ children, light = false }) { return <p className={`eyebrow${light ? ' light' : ''}`}>{children}</p>; }
 function Button({ children, href, variant = 'dark' }) { return <a className={`button ${variant}`} href={href}>{children}<ArrowRight size={17} strokeWidth={1.8} /></a>; }
 
@@ -21,18 +21,7 @@ function Header() {
 }
 
 function OrbitArt() {
-  return <div className="pathway-art" aria-hidden="true">
-    <div className="pathway-glow" /><div className="pathway-grid" />
-    <motion.div className="profile-panel" initial={{ opacity: 0, x: 32, rotate: 4 }} animate={{ opacity: 1, x: 0, rotate: 0 }} transition={{ delay: .65, duration: .8, ease: 'easeOut' }}>
-      <div className="profile-panel-head"><span className="profile-avatar">A</span><div><b>Student profile</b><small>Verified pathway</small></div><i>✓</i></div>
-      <div className="profile-progress"><span>Profile strength</span><b>92%</b><i><em /></i></div>
-      <div className="profile-lines"><span /><span /><span /></div>
-      <div className="profile-tags"><b>Academic</b><b>Context</b><b>Ambition</b></div>
-    </motion.div>
-    <motion.div className="connection-line" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1.1, duration: .7 }} />
-    <motion.div className="university-panel" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.25, duration: .7 }}><span>01</span><b>University<br />ready to meet them.</b><i>↗</i></motion.div>
-    <div className="pathway-caption"><span>ONE PORTABLE PROFILE</span><i>→</i><span>MANY POSSIBILITIES</span></div>
-  </div>;
+  return <div className="orbit-art" aria-hidden="true"><motion.div className="orbit orbit-outer" animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 54, ease: 'linear' }} /><motion.div className="orbit orbit-middle" animate={{ rotate: -360 }} transition={{ repeat: Infinity, duration: 36, ease: 'linear' }} /><div className="orbit orbit-inner" /><motion.div className="orb-core" animate={{ scale: [1, 1.06, 1] }} transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}>ONE<br />WORLD</motion.div><div className="planet planet-one"><i></i><span>STUDENT</span></div><div className="planet planet-two"><i></i><span>BRIDGEIT</span></div><div className="planet planet-three"><i></i><span>UNIVERSITY</span></div></div>;
 }
 
 function Hero() {
